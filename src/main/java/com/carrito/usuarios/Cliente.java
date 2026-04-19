@@ -51,7 +51,7 @@ public class Cliente {
 
     /* ////////////////// Methods ////////////////// */
     public Double getMontoDeuda() {
-        return tarjetas.stream()
+        return carritos.stream()
                 .flatMap(t -> t.getPagos().stream()) // Esto aplana la lista de List<Pago> por cada Tarjeta
                 .mapToDouble(p -> p.getMonto()) // a cada Pago de cada Tarjeta lo voy haciendo el map
                 .sum();
