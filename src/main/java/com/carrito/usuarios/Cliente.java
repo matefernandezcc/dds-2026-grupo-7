@@ -18,10 +18,10 @@ public class Cliente {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
-        this.direcciones = direcciones;
-        this.carritos = carritos;
-        this.tarjetas = tarjetas;
-        this.esPreferencial = esPreferencial;
+        this.direcciones = new ArrayList<>();
+        this.carritos = new ArrayList<>();
+        this.tarjetas = new ArrayList<>();
+        this.esPreferencial = false;
     }
 
     /* ////////////////// Getters ////////////////// */
