@@ -12,9 +12,7 @@ public class Cliente {
     private List<Tarjeta> tarjetas;
     private Boolean esPreferencial;
 
-    public Cliente(
-            String nombre, String apellido, String email, List<Direccion> direcciones,
-            List<Carrito> carritos, List<Tarjeta> tarjetas, Boolean esPreferencial) {
+    public Cliente(String nombre, String apellido, String email) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
