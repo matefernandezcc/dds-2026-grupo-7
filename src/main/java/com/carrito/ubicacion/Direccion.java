@@ -1,6 +1,7 @@
 package com.carrito.ubicacion;
 
 //import com.carrito.ubicacion.Ciudad;
+import java.util.List;
 
 public class Direccion{
     private String calle1;
@@ -8,23 +9,25 @@ public class Direccion{
     private Integer altura;
     private boolean sinAltura;
     private Integer piso;
-    private Integer cuerpo;
+    //private Integer cuerpo;
     private String departamento;
     private Ciudad ciudad;
 
+    private List<Ciudad> ciudadesHabilitadas;
+ 
     public Direccion (String calle1, String calle2, Integer altura, boolean sinAltura, Integer piso, Integer cuerpo, String departamento, Ciudad ciudad){
         this.calle1 = calle1;
         this.calle2 = calle2;
         this.altura = altura;
         this.sinAltura = sinAltura;
         this.piso = piso;
-        this.cuerpo = cuerpo;
+        //this.cuerpo = cuerpo;
         this.departamento = departamento;
         this.ciudad = ciudad;
     }
 
     public String getCalle(){
-        return self.getCalle1() + " y " + self.getCalle2();
+        return this.getCalle1() + " y " + this.getCalle2();
     }
 
     public Integer getAltura(){
@@ -39,39 +42,41 @@ public class Direccion{
         return this.piso;
     }
 
-    public Integer getCuerpo(){
+    /*public Integer getCuerpo(){
         return this.cuerpo;
-    }
+    }*/
 
     public String getDepartamento(){
         return this.departamento;
     }
 
     private Boolean tieneDepartamento(){
-        return self.getPiso() != null && self.getDepartamento() != null;
+        return this.getPiso() != null && this.getDepartamento() != null;
     }
 
     public String getDepartamentoCompleto(){
-        return "Piso: " + self.getPiso() + ", Departamento: " + self.getDepartamento();
+        return "Piso: " + this.getPiso() + ", Departamento: " + this.getDepartamento();
     }
 
     public Ciudad getCiudad(){
-        return this.ciudad.getNombre() + ", " + this.ciudad.getProvincia();
+        return this.ciudad.getNombre() + ", " + this.ciudad.getProvincia() + ", " + this.ciudad.getProvincia().getPais();
     }
 
     public String getDireccion(){
-        if (self.getSinAltura()){
-            return self.getCalle() + self.getCiudad()
+        if (this.getSinAltura()){
+            return this.getCalle() + this.getCiudad()
         }
 
-        if (!self.tieneDepartamento()){
-            return self.getCalle() + self.getAltura() + ", " + self.getCiudad()
+        if (!this.tieneDepartamento()){
+            return this.getCalle() + this.getAltura() + ", " + this.getCiudad()
         }
 
-        return self.getCalle() + self.getAltura() + ", " + self.getDepartamentoCompleto()
+        return this.getCalle() + this.getAltura() + ", " + this.getDepartamentoCompleto() + ", " + this.getCiudad()
      }
 
      //public getLatitud(){}
      //public getLongitud(){}
-     //public Boolean estaHabilitadoEnvio(){}
+    public Boolean estaHabilitadoEnvio(){
+        return ciudadesHabilitadas.contains(this.getCiudad());
+    }
 }
