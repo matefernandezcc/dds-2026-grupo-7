@@ -1,7 +1,10 @@
 package com.carrito.usuarios;
 
 import java.util.List;
+import java.util.ArrayList;
+import com.carrito.ubicacion.Direccion;
 import com.carrito.compras.Carrito;
+import com.carrito.pagos.Tarjeta;
 
 public class Cliente {
     private String nombre;
