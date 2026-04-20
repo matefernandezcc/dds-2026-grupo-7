@@ -1,21 +1,20 @@
 package com.carrito.pagos;
 
 import com.carrito.compras.Carrito;
-
 public class Pago {
-    private Carrito  carrito;
+    private Carrito carrito;
     private Tarjeta tarjeta;
     private Double monto;
+    
+    public Carrito getCarrito(){ return carrito; }
+    public Tarjeta getTarjeta(){ return tarjeta; }
+    public Double getMonto(){ return monto; }
 
-    public boolean verficarTarjeta(){return tarjeta.getMontoDisponible()>0;}
-    public Carrito getCarrito(){return carrito;}
-    public Tarjeta getTarjeta(){return tarjeta;}
-    public Double getMonto(){return monto;}
+    public Boolean verficarTarjeta(){ return tarjeta.getMontoDisponible() > 0; } // Asumo que quieres verificar si tiene saldo positivo
 
-    public Pago (Carrito carrito, Tarjeta tarjeta,Double monto){
+    public Pago (Carrito carrito, Tarjeta tarjeta, Double monto){
         this.carrito=carrito;
         this.tarjeta=tarjeta;
         this.monto= monto;
     }
 }
-

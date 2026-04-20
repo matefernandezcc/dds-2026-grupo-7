@@ -5,6 +5,7 @@ import com.carrito.ubicacion.Direccion;
 import com.carrito.usuarios.Cliente;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Carrito {
@@ -16,33 +17,58 @@ public class Carrito {
     private List<Pago> pagos;
     private Estado estado;
 
-    public Carrito(List<Item> items, LocalDate fechaCompra, Cliente cliente, Direccion direccionEnvio, Direccion direccionCobro, List<Pago> pagos) {
+    public Carrito(List<Item> items, Cliente cliente) {
         this.items = items;
-        this.fechaCompra = fechaCompra;
+        this.fechaCompra = LocalDate.now();
         this.cliente = cliente;
-        this.direccionEnvio = direccionEnvio;
-        this.direccionCobro = direccionCobro;
-        this.pagos = pagos;
+        this.direccionEnvio = null;
+        this.direccionCobro = null;
+        this.pagos = new ArrayList<>();
         this.estado = Estado.EN_PROCESO;
     }
+ 
+    public LocalDate getFechaCompra(){ return fechaCompra; }
+    public List<Pago> getPagos(){ return pagos; }
 
-    public LocalDate getFechaCompra() {return fechaCompra;}
-    public List<Pago> getPagos() {return pagos;}
-    public void setEstado(Estado estado) {this.estado = estado;}
+    public void setFechaCompra(LocalDate fechaCompra) {
+        this.fechaCompra = fechaCompra;
+    }
+    
+    public void setDireccionCobro(Direccion direccionCobro){
+        this.direccionCobro = direccionCobro;
+    }
+
+    public void setDireccionEnvio(Direccion direccionEnvio){
+        this.direccionEnvio = direccionEnvio;
+    }
+
+    public void addPago(Pago pago){
+        pagos.add(pago);
+    }
+    
+    public Double getMontoPagado() {
+        return pagos.stream()
+                    .mapToDouble(Pago::getMonto)
+                    .sum();
+    }
+
+    public Double getMontoCarrito() {
+        return items.stream()
+                    .mapToDouble(Item::getPrecioOficial)
+                    .sum();
+    }
+
+    public Double getMontoDeuda(){
+        return getMontoCarrito() - getMontoPagado(); // Total - Pagado = Adeudado
+    }
+
+    public void setEstado(Estado estado){ this.estado = estado; }
 
     public void cerrar() {
         this.setEstado(Estado.CERRADO);
     }
 
-    public Double getMontoPagado() {
-        return pagos.stream().mapToDouble(p -> p.getMonto()).sum();
-    }
-
-    public Double getMontoCarrito() {
-        Double total = 0.0;
-        for (Item item : items) {
-            total += item.getPrecioOficial();
-        }
-        return total;
+    public void addItem(Item item) {
+        this.items.add(item);
     }
 }
