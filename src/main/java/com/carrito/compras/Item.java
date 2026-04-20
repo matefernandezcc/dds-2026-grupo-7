@@ -5,11 +5,11 @@ import com.carrito.catalogo.Producto;
 public class Item {
     private Carrito carrito;
     private Producto producto;
-    private int cantidad;
+    private Integer cantidad;
     private Double precioUnitario;
 
     // Constructor
-    public Item(Carrito carrito, Producto producto, int cantidad, Double precioUnitario) {
+    public Item(Carrito carrito, Producto producto, Integer cantidad, Double precioUnitario) {
         this.carrito = carrito;
         this.producto = producto;
         this.cantidad = cantidad;
@@ -18,7 +18,7 @@ public class Item {
 
     public Carrito getCarrito() { return carrito; }
     public Producto getProducto() { return producto; }
-    public int getCantidad() { return cantidad; }
+    public Integer getCantidad() { return cantidad; }
     public Double getPrecioUnitario() { return precioUnitario; }
 
     public Double getPrecio() {
@@ -33,5 +33,9 @@ public class Item {
     
     public Double getDescuento() {
         return this.getPrecioOficial() - this.getPrecio();
+    }
+
+    public void setCarrito(Carrito carrito) {
+        this.carrito = carrito;
     }
 }

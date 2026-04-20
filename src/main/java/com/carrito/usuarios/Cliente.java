@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.carrito.ubicacion.Direccion;
 import com.carrito.compras.Carrito;
 import com.carrito.pagos.Tarjeta;
+import com.carrito.pagos.Pago;
 
 public class Cliente {
     private String nombre;
@@ -13,7 +14,7 @@ public class Cliente {
     private List<Direccion> direcciones;
     private List<Carrito> carritos;
     private List<Tarjeta> tarjetas;
-    private Boolean esPreferencial;
+    private boolean esPreferencial;
 
     public Cliente(String nombre, String apellido, String email) {
         this.nombre = nombre;
@@ -25,29 +26,43 @@ public class Cliente {
         this.esPreferencial = false;
     }
 
-    public String getNombre() {return nombre;}
-    public String getApellido() {return apellido;}
-    public String getEmail() {return email;}
-    public Direccion getDireccion(Integer idDireccion) {return direcciones.get(idDireccion);}
-    public Carrito getCarrito(Integer idCarrito) {return carritos.get(idCarrito);}
-    public Tarjeta getTarjeta(Integer idTarjeta) {return tarjetas.get(idTarjeta);}
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Direccion getDireccion(Integer idDireccion) {
+        return direcciones.get(idDireccion);
+    }
+
+    public Carrito getCarrito(Integer idCarrito) {
+        return carritos.get(idCarrito);
+    }
+
+    public Tarjeta getTarjeta(Integer idTarjeta) {
+        return tarjetas.get(idTarjeta);
+    }
 
     public Double getMontoDeuda() {
         return carritos.stream()
-                .flatMap(t -> t.getPagos().stream()) // Esto aplana la lista de List<Pago> por cada Carrito a una sola lista de Pago
-                .mapToDouble(p -> p.getMonto()) // a cada Pago de cada Carrito lo voy haciendo el map
+                .mapToDouble(Carrito::getMontoDeuda)
                 .sum();
     }
 
-    public Boolean estaHabilitado() {
-        if (this.getMontoDeuda() > 1000.0){
-            return false;
-        } else {
-            return true;
-        }
+    public boolean estaHabilitado() {
+        return this.getMontoDeuda() <= 1000.0;
     }
 
-    public Boolean esPreferencial() {return esPreferencial;}
+    public boolean esPreferencial() {
+        return esPreferencial;
+    }
 
     public void addDireccion(Direccion direccion) {
         direcciones.add(direccion);
@@ -55,5 +70,9 @@ public class Cliente {
 
     public void addCarrito(Carrito carrito) {
         carritos.add(carrito);
+    }
+
+    public void addTarjeta(Tarjeta tarjeta) {
+        tarjetas.add(tarjeta);
     }
 }
