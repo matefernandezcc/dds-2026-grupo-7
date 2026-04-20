@@ -8,7 +8,7 @@ public class PrecioProducto {
     private Double precio;
 
     // Constructor
-    public PrecioProducto(LocalDate fechaInicioVigencia, LocalDate fechaFinVigencia, double precio) {
+    public PrecioProducto(LocalDate fechaInicioVigencia, LocalDate fechaFinVigencia, Double precio) {
         this.fechaInicioVigencia = fechaInicioVigencia;
         this.fechaFinVigencia = fechaFinVigencia;
         this.precio = precio;

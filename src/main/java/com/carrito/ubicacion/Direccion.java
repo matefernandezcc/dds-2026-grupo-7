@@ -9,7 +9,7 @@ public class Direccion{
     private Integer altura;
     private boolean sinAltura;
     private Integer piso;
-    //private Integer cuerpo;
+    private Integer cuerpo;
     private String departamento;
     private Ciudad ciudad;
 
@@ -21,7 +21,7 @@ public class Direccion{
         this.altura = altura;
         this.sinAltura = sinAltura;
         this.piso = piso;
-        //this.cuerpo = cuerpo;
+        this.cuerpo = cuerpo;
         this.departamento = departamento;
         this.ciudad = ciudad;
     }
@@ -29,26 +29,14 @@ public class Direccion{
     public String getCalle(){
         return this.getCalle1() + " y " + this.getCalle2();
     }
-
-    public Integer getAltura(){
-        return this.altura;
-    }
-
-    public boolean getSinAltura(){
-        return this.sinAltura;
-    }
-
-    public Integer getPiso(){
-        return this.piso;
-    }
-
-    /*public Integer getCuerpo(){
-        return this.cuerpo;
-    }*/
-
-    public String getDepartamento(){
-        return this.departamento;
-    }
+    
+    public String getCalle1(){ return this.calle1;}
+    public String getCalle2(){ return this.calle2;}
+    public Integer getAltura(){return this.altura;}
+    public boolean getSinAltura(){return this.sinAltura;}
+    public Integer getPiso(){return this.piso;}
+    public String getDepartamento(){return this.departamento;}
+    public Ciudad getCiudad(){return ciudad;}
 
     private Boolean tieneDepartamento(){
         return this.getPiso() != null && this.getDepartamento() != null;
@@ -58,25 +46,23 @@ public class Direccion{
         return "Piso: " + this.getPiso() + ", Departamento: " + this.getDepartamento();
     }
 
-    public Ciudad getCiudad(){
-        return this.ciudad.getNombre() + ", " + this.ciudad.getProvincia() + ", " + this.ciudad.getProvincia().getPais();
-    }
-
     public String getDireccion(){
         if (this.getSinAltura()){
-            return this.getCalle() + this.getCiudad()
+            return this.getCalle() + this.getCiudad();
         }
 
         if (!this.tieneDepartamento()){
-            return this.getCalle() + this.getAltura() + ", " + this.getCiudad()
+            return this.getCalle() + this.getAltura() + ", " + this.getCiudad();
         }
 
-        return this.getCalle() + this.getAltura() + ", " + this.getDepartamentoCompleto() + ", " + this.getCiudad()
-     }
+        return this.getCalle() + this.getAltura() + ", " + this.getDepartamentoCompleto() + ", " + this.getCiudad();
+    }
 
-     //public getLatitud(){}
-     //public getLongitud(){}
     public Boolean estaHabilitadoEnvio(){
         return ciudadesHabilitadas.contains(this.getCiudad());
     }
+
+    //public getLatitud(){}
+    //public getLongitud(){}
 }
+

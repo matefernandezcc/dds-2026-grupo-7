@@ -25,46 +25,29 @@ public class Cliente {
         this.esPreferencial = false;
     }
 
-    /* ////////////////// Getters ////////////////// */
-    public String getNombre() {
-        return nombre;
-    }
+    public String getNombre() {return nombre;}
+    public String getApellido() {return apellido;}
+    public String getEmail() {return email;}
+    public Direccion getDireccion(Integer idDireccion) {return direcciones.get(idDireccion);}
+    public Carrito getCarrito(Integer idCarrito) {return carritos.get(idCarrito);}
+    public Tarjeta getTarjeta(Integer idTarjeta) {return tarjetas.get(idTarjeta);}
 
-    public String getApellido() {
-        return apellido;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public Direccion getDireccion(Integer idDireccion) {
-        return direcciones.get(idDireccion);
-    }
-
-    public Carrito getCarrito(Integer idCarrito) {
-        return carritos.get(idCarrito);
-    }
-
-    public Tarjeta getTarjeta(Integer idTarjeta) {
-        return tarjetas.get(idTarjeta);
-    }
-
-    /* ////////////////// Methods ////////////////// */
     public Double getMontoDeuda() {
         return carritos.stream()
-                .flatMap(t -> t.getPagos().stream()) // Esto aplana la lista de List<Pago> por cada Tarjeta
-                .mapToDouble(p -> p.getMonto()) // a cada Pago de cada Tarjeta lo voy haciendo el map
+                .flatMap(t -> t.getPagos().stream()) // Esto aplana la lista de List<Pago> por cada Carrito a una sola lista de Pago
+                .mapToDouble(p -> p.getMonto()) // a cada Pago de cada Carrito lo voy haciendo el map
                 .sum();
     }
 
     public Boolean estaHabilitado() {
-        return true;
+        if (this.getMontoDeuda() > 1000.0){
+            return false;
+        } else {
+            return true;
+        }
     }
 
-    public Boolean esPreferencial() {
-        return esPreferencial;
-    }
+    public Boolean esPreferencial() {return esPreferencial;}
 
     public void addDireccion(Direccion direccion) {
         direcciones.add(direccion);

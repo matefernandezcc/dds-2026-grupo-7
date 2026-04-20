@@ -1,7 +1,6 @@
 package com.carrito.catalogo;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -26,13 +25,8 @@ public class Producto {
         return this.nombre;
     }
 
-    // Método extra para poder cargarle precios al producto desde el App.java
-    public void agregarPrecioHistorico(PrecioProducto precio) {
-        this.preciosHistoricos.add(precio);
-    }
-
     // Busca el precio correspondiente a una fecha específica
-    public double getPrecio(LocalDate fechaVigencia) {
+    public Double getPrecio(LocalDate fechaVigencia) {
         for (PrecioProducto precioProducto : preciosHistoricos) {
             if (precioProducto.getCumpleVigencia(fechaVigencia)) {
                 return precioProducto.getPrecio();
