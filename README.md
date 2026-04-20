@@ -4,8 +4,8 @@
 
 ## 👥 Integrantes
 
-| Integrante                          | Legajo   |
-|-----------------------------------|----------|
+| Integrante                        | Legajo    |
+|-----------------------------------|-----------|
 | Fernandez Cruz, Mateo             | 209.986-0 |
 | Barco Palacios, Ezequiel          | 208.891-5 |
 | Calabro, Lucio                    | 222.171-8 |

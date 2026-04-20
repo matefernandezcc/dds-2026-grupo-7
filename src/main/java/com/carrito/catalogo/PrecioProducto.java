@@ -1,19 +1,31 @@
 package com.carrito.catalogo;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class PrecioProducto {
-    private Date fechaInicioVigencia;
-    private Date fechaFinVigencia;
-    private int precio;
+    private LocalDate fechaInicioVigencia;
+    private LocalDate fechaFinVigencia;
+    private Double precio;
 
-
-    public Date getFechaInicioVigencia(){return fechaInicioVigencia;}
-    public Date getFechaFinVigencia(){return fechaFinVigencia;}
-
-    public boolean getCumpleVigencia(Date fecha){
-        return fecha.after(fechaInicioVigencia) && fecha.before(fechaFinVigencia);
+    // Constructor
+    public PrecioProducto(LocalDate fechaInicioVigencia, LocalDate fechaFinVigencia, Double precio) {
+        this.fechaInicioVigencia = fechaInicioVigencia;
+        this.fechaFinVigencia = fechaFinVigencia;
+        this.precio = precio;
     }
 
-    public int getPrecio() {return precio;}
+    public LocalDate getFechaInicioVigencia() { return fechaInicioVigencia; }
+    public LocalDate getFechaFinVigencia() { return fechaFinVigencia; }
+    public Double getPrecio() { return precio; }
+
+    // Lógica de validación de fechas
+    public boolean getCumpleVigencia(LocalDate fecha) {
+        // Devuelve true si la fecha no es antes de la fecha de inicio y no es después de la fecha de fin
+        return !fecha.isBefore(fechaInicioVigencia) && !fecha.isAfter(fechaFinVigencia);
+    }
+
+    @Override
+    public String toString() {
+        return this.fechaInicioVigencia + " - " + this.fechaFinVigencia + " : " + String.valueOf(this.precio);
+    }
 }
